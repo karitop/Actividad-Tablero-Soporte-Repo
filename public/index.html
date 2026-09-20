@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesa de ayuda</title>
+  <!-- Tailwind por CDN: hace falta internet para que carguen los estilos -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="app.js" defer></script>
+</head>
+<!--
+  Esta página todavía no tiene ninguna clase de Tailwind, por eso se ve
+  tan plana. Darle forma es el nivel 0 del enunciado.
+  Puedes añadir clases y contenedores, pero no cambies los id: app.js
+  depende de ellos.
+-->
+<body>
+
+  <header>
+  <h1 class="px-1 text-purple-700">Mesa de ayuda</h1>
+  <p class="px-1 text-purple-400">Tickets de soporte de la oficina</p>
+  </header>
+
+  <main class="px-1 grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Formulario: crea tickets y, desde el nivel 4, también los edita -->
+    <section class="lg:col-span-1 p-4 border rounded border-purple-800">
+      <h2 id="titulo-formulario">Nuevo ticket</h2>
+      
+      <form id="form-ticket" novalidate class="space-y-2">
+        <label for="titulo">Título</label>
+        <input class="border-2 rounded w-full focus:ring-2 focus:ring-purple-500" id="titulo" name="titulo" type="text">
+        <p class="text-red-500" id="error-titulo"></p>
+
+        <label for="descripcion">Descripción</label>
+        <textarea class="border-2 rounded w-full focus:ring-2 focus:ring-purple-500" id="descripcion" name="descripcion" rows="3"></textarea>
+
+        <label for="solicitante">Solicitante</label>
+        <input class="border-2 rounded w-full focus:ring-2 focus:ring-purple-500" id="solicitante" name="solicitante" type="text">
+        <p class="text-red-500" id="error-solicitante"></p>
+
+        <label for="categoria">Categoría</label>
+        <select class="border-2 rounded w-full focus:ring-2 focus:ring-purple-500" id="categoria" name="categoria">
+          <option value="hardware">Hardware</option>
+          <option value="software">Software</option>
+          <option value="red">Red</option>
+          <option value="accesos">Accesos</option>
+        </select>
+
+        <label for="prioridad">Prioridad</label>
+        <select class="border-2 rounded w-full focus:ring-2 focus:ring-purple-500" id="prioridad" name="prioridad">
+          <option value="baja">Baja</option>
+          <option value="media" selected>Media</option>
+          <option value="alta">Alta</option>
+        </select>
+
+        <button class="border rounded px-2 py-1 my-1 bg-purple-200 hover:bg-purple-400 transition focus:ring-2 focus:ring-purple-500" id="btn-guardar" type="submit">Crear ticket</button>
+        <button class="border rounded px-2 py-1 my-1 bg-gray-200 hover:bg-gray-400 transition" id="btn-cancelar" type="button" hidden>Cancelar edición</button>
+      </form>
+    </section>
+
+    <!-- Tablero -->
+    <section class="lg:col-span-2 p-4 border rounded border-purple-800">
+      <h2>Tickets</h2>
+
+      <div id="resumen"></div>
+
+      <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+        <label for="filtro-estado">Estado</label>
+        <select class="border-2 rounded focus:ring-2 focus:ring-purple-500" id="filtro-estado">
+          <option value="todos">Todos</option>
+          <option value="abierto">Abiertos</option>
+          <option value="en_progreso">En progreso</option>
+          <option value="resuelto">Resueltos</option>
+        </select>
+
+        <label for="busqueda">Buscar</label>
+        <input class="border-2 rounded focus:ring-2 focus:ring-purple-500" id="busqueda" type="search" placeholder="Buscar por título">
+      </div>
+
+      <p id="mensaje"></p>
+
+      <div id="lista-tickets"></div>
+    </section>
+
+  </main>
+
+</body>
+</html>
